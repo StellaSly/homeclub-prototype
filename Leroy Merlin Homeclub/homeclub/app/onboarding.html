@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Onboarding · my Home Card upgrade</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · Onboarding</span>
+    <h1 data-copy-html="onboarding.headline_label">Step 1 of 3 — <em>Upgrade your my Home Card</em></h1>
+    <p>This flow shows how Leroy Merlin can convert an existing my Home Card member into a HomeClub member — without asking them to re-register.</p>
+  </div>
+
+  <!-- Step nav between app screens -->
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <!-- Step 1 -->
+      <section class="onboard-screen" data-step="0">
+        <div>
+          <div class="stepper"><span class="dot current"></span><span class="dot"></span><span class="dot"></span></div>
+
+          <div class="onboard-visual">
+            <div>
+              <div class="home-card-banner">
+                You are currently subscribed to the <strong>Leroy Merlin</strong> Loyalty Program.
+              </div>
+              <div class="home-card-mock">
+                <div class="hc-title">My Home Card</div>
+                <div class="hc-row">Card Holder: <strong>Mr. Thandi Mokoena</strong></div>
+                <div class="hc-row">Card Number: <strong>9322 9038 4293 1998</strong></div>
+                <div class="hc-barcode" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="onboard-body">
+            <span class="eyebrow" style="color: var(--hc-coral); display: block; margin-bottom: 10px" data-copy="onboarding.steps.0.eyebrow">Step 1 of 3</span>
+            <h2 data-copy-html="onboarding.steps.0.headline_html">You're already <em>a my Home Card member</em>.</h2>
+            <p data-copy="onboarding.steps.0.body">Since you downloaded the Leroy Merlin app and registered, you've been unlocking loyalty pricing at every till. Nothing changes — your my Home Card stays exactly as it is.</p>
+          </div>
+        </div>
+
+        <div class="onboard-actions">
+          <button class="btn btn-coral" data-goto-step="1">
+            <span data-copy="onboarding.steps.0.cta">Continue</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="onboard-screen" data-step="1" hidden>
+        <div>
+          <div class="stepper"><span class="dot"></span><span class="dot current"></span><span class="dot"></span></div>
+
+          <div class="onboard-visual">
+            <div class="upgrade-flow">
+              <div class="home-card-mock" style="transform: scale(0.82); transform-origin: center; margin-bottom: -10px">
+                <div class="hc-title">My Home Card</div>
+                <div class="hc-row">Card Holder: <strong>Mr. Thandi Mokoena</strong></div>
+                <div class="hc-row">Card Number: <strong>9322 9038 4293 1998</strong></div>
+                <div class="hc-barcode" aria-hidden="true"></div>
+              </div>
+              <div class="upgrade-arrow" aria-hidden="true"></div>
+              <div class="home-card-mock upgraded">
+                <div class="hc-title" style="font-family: var(--ff-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600">HomeClub · Tier</div>
+                <div class="hc-title-big">NEST</div>
+                <div class="hc-row">Balance: <strong>0 HB</strong></div>
+                <div class="hc-row">Member: <strong>Thandi · HC10001</strong></div>
+                <div class="hc-barcode" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="onboard-body">
+            <span class="eyebrow" style="color: var(--hc-coral); display: block; margin-bottom: 10px" data-copy="onboarding.steps.1.eyebrow">Step 2 of 3</span>
+            <h2 data-copy-html="onboarding.steps.1.headline_html">Now meet <em>HomeClub</em>.</h2>
+            <p data-copy="onboarding.steps.1.body">A new layer on top of my Home Card. The same identity, the same app, upgraded.</p>
+          </div>
+        </div>
+
+        <div class="onboard-actions">
+          <button class="btn btn-coral" data-goto-step="2">
+            <span data-copy="onboarding.steps.1.cta">Continue</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <button class="btn btn-ghost" data-goto-step="0">← Back</button>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="onboard-screen" data-step="2" hidden>
+        <div>
+          <div class="stepper"><span class="dot"></span><span class="dot"></span><span class="dot current"></span></div>
+
+          <div class="onboard-visual">
+            <div class="home-card-mock upgraded" style="transform: rotate(-3deg)">
+              <div class="hc-title" style="font-family: var(--ff-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600">HomeClub · Tier</div>
+              <div class="hc-title-big">NEST</div>
+              <div class="hc-row">Hi, <strong>Thandi</strong>, welcome in.</div>
+              <div class="hc-row">Starting bonus: <strong>+250 HB</strong></div>
+              <div class="hc-barcode" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="onboard-body">
+            <span class="eyebrow" style="color: var(--hc-coral); display: block; margin-bottom: 10px" data-copy="onboarding.steps.2.eyebrow">Step 3 of 3</span>
+            <h2 data-copy-html="onboarding.steps.2.headline_html">You're in the <em>NEST</em> tier — free, and here's what's waiting.</h2>
+            <p data-copy="onboarding.steps.2.body">1% back on everything. Monthly workshops. Birthday coffee at Mugg & Bean.</p>
+
+            <ul style="list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:8px">
+              <li style="display:flex; gap:10px; align-items:center; font-size:12.5px; color:var(--hc-charcoal-2)">
+                <span style="width:22px; height:22px; border-radius:50%; background:var(--hc-coral-soft); color:var(--hc-coral); display:grid; place-items:center; font-size:11px; font-weight:700">1%</span>
+                <span>Back on every LM purchase</span>
+              </li>
+              <li style="display:flex; gap:10px; align-items:center; font-size:12.5px; color:var(--hc-charcoal-2)">
+                <span style="width:22px; height:22px; border-radius:50%; background:var(--hc-coral-soft); color:var(--hc-coral); display:grid; place-items:center; font-size:12px; font-weight:700">☕</span>
+                <span>Birthday coffee at Mugg & Bean</span>
+              </li>
+              <li style="display:flex; gap:10px; align-items:center; font-size:12.5px; color:var(--hc-charcoal-2)">
+                <span style="width:22px; height:22px; border-radius:50%; background:var(--hc-coral-soft); color:var(--hc-coral); display:grid; place-items:center; font-size:12px; font-weight:700">🎓</span>
+                <span>Monthly Saturday workshops</span>
+              </li>
+              <li style="display:flex; gap:10px; align-items:center; font-size:12.5px; color:var(--hc-charcoal-2)">
+                <span style="width:22px; height:22px; border-radius:50%; background:var(--hc-coral-soft); color:var(--hc-coral); display:grid; place-items:center; font-size:12px; font-weight:700">🛡️</span>
+                <span>3 months to change your mind — guaranteed returns</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="onboard-actions">
+          <a class="btn btn-coral" href="home.html">
+            <span data-copy="onboarding.steps.2.cta">Open my HomeClub</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <button class="btn btn-ghost" data-goto-step="1">← Back</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  // App step nav
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'onboarding', '../');
+
+  // Step switcher
+  const steps = Array.from(document.querySelectorAll('[data-step]'));
+  document.querySelectorAll('[data-goto-step]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = +btn.dataset.gotoStep;
+      steps.forEach(s => s.hidden = +s.dataset.step !== target);
+      // scroll phone screen to top
+      const screen = btn.closest('.phone-screen');
+      if (screen) screen.scrollTop = 0;
+    });
+  });
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

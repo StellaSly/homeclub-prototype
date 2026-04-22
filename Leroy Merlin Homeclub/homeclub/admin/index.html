@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<title>HomeClub · Admin · Overview — for Naresh Rocharam</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="admin-stage">
+
+  <header class="admin-header">
+    <div class="ah-left">
+      <span class="eyebrow ah-eyebrow" data-copy="admin_overview.eyebrow">Admin Dashboard</span>
+      <h1 data-copy="admin_overview.headline">HomeClub · Pilot wave</h1>
+      <div class="ah-sub" data-copy="admin_overview.sub">Live-view of the Leroy Merlin SA HomeClub pilot — 320 activated members across six stores</div>
+    </div>
+    <div class="ah-actions">
+      <span class="ah-live">
+        <span class="pulse" aria-hidden="true"></span>
+        <span data-copy="admin_overview.live_label">Live · Seed 20260421</span>
+      </span>
+    </div>
+  </header>
+
+  <nav class="admin-subnav" aria-label="Admin sections">
+    <a href="index.html" class="current" data-copy="admin_nav.overview">Overview</a>
+    <a href="members.html" data-copy="admin_nav.members">Members</a>
+    <a href="mystery-shop.html">Mystery Shop</a>
+    <a href="why-cmr.html" data-copy="admin_nav.why_cmr">Why CMR Africa</a>
+  </nav>
+
+  <div class="admin-main">
+
+    <!-- Hero KPI -->
+    <section class="kpi-grid" id="kpi-row"></section>
+
+    <!-- Rotating CMR Africa Weekly Insight -->
+    <section class="insight-panel" aria-live="polite">
+      <div class="i-head">
+        <span class="i-eyebrow" data-copy="admin_overview.insight_eyebrow">CMR Africa · Weekly Insight</span>
+        <div class="i-dots" data-insight-dots></div>
+      </div>
+      <h2 data-insight-headline></h2>
+      <p class="i-body" data-insight-body></p>
+      <div class="i-foot" data-insight-foot></div>
+    </section>
+
+    <!-- Charts: growth + tier distribution -->
+    <section class="chart-grid">
+      <div class="panel">
+        <div class="p-head">
+          <div>
+            <div class="p-title" data-copy="admin_overview.panels.growth_title">Member growth · 14 weeks</div>
+            <div class="p-sub" data-copy="admin_overview.panels.growth_sub">320 activated · 134 in active project</div>
+          </div>
+          <div class="p-actions">
+            <a class="active" href="#">14w</a><a href="#">YTD</a><a href="#">All</a>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="growthChart"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <div class="p-head">
+          <div>
+            <div class="p-title" data-copy="admin_overview.panels.tier_title">Tier distribution</div>
+            <div class="p-sub" data-copy="admin_overview.panels.tier_sub">68 / 26 / 6 — realistic year-1 shape</div>
+          </div>
+        </div>
+        <div class="tier-dist-list" id="tierDistList"></div>
+      </div>
+    </section>
+
+    <!-- Charts: earn/burn + projects -->
+    <section class="chart-grid">
+      <div class="panel">
+        <div class="p-head">
+          <div>
+            <div class="p-title" data-copy="admin_overview.panels.earnburn_title">Earn vs. burn · by partner · MTD</div>
+            <div class="p-sub" data-copy="admin_overview.panels.earnburn_sub">HomeBucks flow through the coalition</div>
+          </div>
+        </div>
+        <div class="chart-wrap sm"><canvas id="earnBurnChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="p-head">
+          <div>
+            <div class="p-title" data-copy="admin_overview.panels.proj_title">Project categories</div>
+            <div class="p-sub" data-copy="admin_overview.panels.proj_sub">Weighted by in-app starts</div>
+          </div>
+        </div>
+        <div class="chart-wrap sm"><canvas id="projChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- Store performance full width -->
+    <section style="margin-top: 14px">
+      <div class="panel">
+        <div class="p-head">
+          <div>
+            <div class="p-title" data-copy="admin_overview.panels.store_title">Store performance · 6 stores</div>
+            <div class="p-sub" data-copy="admin_overview.panels.store_sub">Members + active projects</div>
+          </div>
+        </div>
+        <div class="chart-wrap sm"><canvas id="storeChart"></canvas></div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../vendor/chart.umd.min.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/charts.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'admin' });
+  await HomeClubApp.initCopy('../');
+
+  const copy = HomeClubApp.getCopy();
+
+  // -------- KPIs --------
+  const row = document.getElementById('kpi-row');
+  const kpis = copy.admin_overview.kpis;
+  const hero = copy.admin_overview.hero_kpi;
+  const trendSym = { up: '▲', down: '▼', neutral: '•' };
+  row.innerHTML = `
+    <div class="kpi hero">
+      <div class="k-label">${hero.label}</div>
+      <div class="k-value">${hero.value}<span class="k-unit">${hero.unit}</span></div>
+      <div style="margin-top:8px; font-size:11.5px; color:var(--d-text-mute); line-height:1.5">${hero.caption_html}</div>
+    </div>
+    ${kpis.map(k => `
+      <div class="kpi">
+        <div class="k-label">${k.label}</div>
+        <div class="k-value">${k.value}<span class="k-unit">${k.unit}</span></div>
+        <div class="k-trend ${k.dir}">${trendSym[k.dir]} ${k.trend}</div>
+      </div>
+    `).join('')}
+  `;
+
+  // -------- Insight rotator --------
+  HomeClubApp.mountInsightRotator(document.querySelector('.insight-panel'), copy.admin_overview.insight_rotator);
+
+  // -------- Charts --------
+  HomeClubCharts.setChartDefaults();
+  HomeClubCharts.growthChart(document.getElementById('growthChart'));
+  HomeClubCharts.earnBurnChart(document.getElementById('earnBurnChart'));
+  HomeClubCharts.storeChart(document.getElementById('storeChart'));
+  HomeClubCharts.projChart(document.getElementById('projChart'));
+
+  // -------- Tier distribution --------
+  const d = HomeClubData;
+  const tierColors = { NEST: '#B89B6E', HOME: '#FF7847', HOMESTEAD: '#E5B447' };
+  const tierList = document.getElementById('tierDistList');
+  tierList.innerHTML = d.TIERS.map(t => {
+    const b = d.tierBuckets[t.name];
+    const pct = (b.count / d.MEMBERS.length * 100).toFixed(1);
+    const avg = Math.round(b.totalSpend / Math.max(1, b.count));
+    return `
+      <div class="tier-dist-row">
+        <div class="tname ${t.name.toLowerCase()}">${t.name}</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%; background:${tierColors[t.name]}"></div></div>
+        <div class="tstat">${b.count} <span>(${pct}%)</span></div>
+        <div class="tstat">R${avg.toLocaleString()} <span>avg spend</span></div>
+      </div>
+    `;
+  }).join('');
+
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

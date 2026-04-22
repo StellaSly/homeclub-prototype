@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Project Engine · 90-day window</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · The Project Engine</span>
+    <h1>Scan a project barcode. Unlock a <em>90-day window</em> that doubles your earn and personalises the whole app.</h1>
+    <p>This is the signature mechanic. Everything that happens during a project window — hardware, coffee, contractor, tool hire — earns into a single project wallet, and feeds a completion bonus at day 90.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <!-- Engine hero -->
+      <section class="engine-header">
+        <span class="eyebrow" data-copy="project_engine.eyebrow">The Project Engine</span>
+        <h2 data-copy-html="project_engine.headline_html">Scan a project barcode. Get a <em>90-day window</em> that doubles your earn.</h2>
+      </section>
+
+      <!-- Current active project card -->
+      <div class="project-card" style="margin-top: -14px; position: relative; z-index: 2">
+        <div class="proj-head">
+          <div>
+            <div class="proj-eyebrow">Currently active</div>
+            <div class="proj-name" data-copy="project_engine.active_title">Paint a Room</div>
+          </div>
+          <div class="multiplier">2×</div>
+        </div>
+        <div class="proj-days-wrap">
+          <div class="proj-days-bar"><div class="proj-days-fill" style="width: 15.5%"></div></div>
+          <div class="proj-days-txt"><strong>Day 14</strong> of 90</div>
+        </div>
+        <div style="margin-top:10px; font-size:12px; color:var(--hc-charcoal-2); line-height:1.5" data-copy-html="project_engine.active_caption_html">
+          Day 14 of 90 · <em>2× HomeBucks</em> on paint, prep & finishing
+        </div>
+      </div>
+
+      <!-- Start another project -->
+      <div class="section-h"><span>Start another</span></div>
+      <div class="barcode-box" role="button" tabindex="0">
+        <div class="barcode-visual" aria-hidden="true">◨</div>
+        <div>
+          <div class="bc-title" data-copy="project_engine.barcode_title">Bathroom Renovation</div>
+          <div class="bc-caption" data-copy="project_engine.barcode_caption">Starts the moment you scan in-aisle. Every partner spend counts for 90 days.</div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="section-h"><span data-copy="project_engine.timeline_eyebrow">Your project so far</span></div>
+      <div class="timeline" id="timeline"><!-- JS --></div>
+
+      <!-- What's coming -->
+      <div class="section-h" style="margin-top: 10px">
+        <span data-copy="project_engine.timeline_rewards_eyebrow">What unlocks when you finish</span>
+      </div>
+      <div class="timeline" id="timeline-rewards"><!-- JS --></div>
+
+      <nav class="tabbar" aria-label="App sections" style="margin-top: 6px">
+        <a href="home.html"><span class="tb-ico">⌂</span><span>Home</span></a>
+        <a class="active" href="project.html"><span class="tb-ico">◎</span><span>Project</span></a>
+        <a href="gamification.html"><span class="tb-ico">◆</span><span>Rewards</span></a>
+        <a href="coalition.html"><span class="tb-ico">☵</span><span>Coalition</span></a>
+        <a href="events.html"><span class="tb-ico">✺</span><span>Events</span></a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'project', '../');
+
+  const copy = HomeClubApp.getCopy();
+  document.getElementById('timeline').innerHTML = copy.project_engine.timeline.map(row => `
+    <div class="timeline-row">
+      <div class="timeline-day">Day<strong>${row.day.replace('D','')}</strong></div>
+      <div class="timeline-content">
+        <div class="tl-title">${row.label}</div>
+        <div class="tl-caption">${row.caption}</div>
+      </div>
+      <div class="timeline-earn ${row.pos ? '' : 'neg'}">${row.earn}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('timeline-rewards').innerHTML = copy.project_engine.timeline_rewards.map(row => `
+    <div class="timeline-row">
+      <div class="timeline-day">${row.when.includes('+') ? 'After' : 'Day'}<strong>${row.when.replace('D','').replace('+','')}</strong></div>
+      <div class="timeline-content">
+        <div class="tl-title">${row.label}</div>
+        <div class="tl-caption">${row.caption}</div>
+      </div>
+      <div class="timeline-earn">${row.earn}</div>
+    </div>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

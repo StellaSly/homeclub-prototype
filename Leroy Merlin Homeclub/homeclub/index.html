@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<meta name="description" content="HomeClub by Leroy Merlin — an interactive prototype prepared by CMR Africa for Naresh Rocharam, Leroy Merlin SA.">
+<title>HomeClub · Prototype for Leroy Merlin SA · CMR Africa</title>
+<link rel="icon" type="image/png" href="assets/img/cmr-logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/shared.css">
+<link rel="stylesheet" href="assets/css/member.css">
+
+<style>
+/* Landing-only styles */
+.landing-stage {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(229,83,42,0.28) 0%, transparent 42%),
+    radial-gradient(ellipse at 85% 100%, rgba(229,83,42,0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #000 0%, #080706 50%, #0C0A08 100%);
+  color: #fff;
+  padding: 60px 24px 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.land-inner { max-width: 920px; width: 100%; }
+.land-intro { text-align: center; margin-bottom: 48px; }
+.land-intro .eyebrow { color: var(--hc-coral); display: inline-block; margin-bottom: 18px; }
+.land-intro h1 {
+  font-family: var(--ff-display); font-weight: 500;
+  font-size: clamp(32px, 6vw, 54px); line-height: 1.1;
+  letter-spacing: -1px; max-width: 900px; margin: 0 auto;
+}
+.land-intro h1 em { font-style: italic; color: var(--hc-coral); }
+.land-intro .land-sub {
+  font-size: 15px; color: #b3ada2; margin: 22px auto 0; max-width: 600px; line-height: 1.6;
+}
+.land-cta {
+  display: flex; gap: 12px; justify-content: center; margin-top: 34px; flex-wrap: wrap;
+}
+.land-cta .btn { padding: 14px 26px; font-size: 14px; }
+.land-cta .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.25); }
+.land-cta .btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.4); }
+
+.land-attribution {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px;
+  align-items: center; margin-top: 44px;
+  color: #7a7468;
+  font-family: var(--ff-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.land-attribution .line { height: 1px; background: rgba(255,255,255,0.1); }
+.land-attribution .label { text-align: center; }
+.land-attribution .label strong { color: #fff; font-weight: 600; display: block; font-size: 11px; letter-spacing: 1.8px; }
+.land-attribution .label em {
+  font-family: var(--ff-display); font-style: italic; font-weight: 500; color: var(--hc-coral);
+  font-size: 13px; letter-spacing: 0; text-transform: none; display: block; margin-top: 3px;
+}
+
+.land-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 64px;
+}
+@media (max-width: 780px) { .land-pillars { grid-template-columns: 1fr; } }
+.pillar {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px; padding: 28px 26px 26px;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s var(--ease-out), border-color 0.2s, background 0.2s;
+}
+.pillar:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229,83,42,0.35);
+  background: rgba(229,83,42,0.03);
+}
+.pillar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--hc-coral), transparent);
+}
+.pillar .p-verb {
+  font-family: var(--ff-display); font-weight: 500; font-size: 22px;
+  letter-spacing: -0.4px; margin-bottom: 4px;
+}
+.pillar .p-verb em { font-style: italic; color: var(--hc-coral); }
+.pillar .p-partner {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 1.8px;
+  text-transform: uppercase; color: #7a7468; font-weight: 600;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.pillar .p-blurb { color: #b3ada2; font-size: 13px; line-height: 1.55; }
+
+/* The strategic reframe block */
+.reframe {
+  margin-top: 76px;
+  padding: 40px 36px;
+  background: rgba(229,83,42,0.05);
+  border: 1px solid rgba(229,83,42,0.2);
+  border-radius: 20px;
+  position: relative; overflow: hidden;
+}
+.reframe::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, var(--hc-coral), transparent);
+}
+.reframe .eyebrow { color: var(--hc-coral); display: block; margin-bottom: 10px; }
+.reframe h2 {
+  font-family: var(--ff-display); font-weight: 500; font-size: clamp(22px, 3.5vw, 30px);
+  line-height: 1.2; letter-spacing: -0.5px; max-width: 740px; margin-bottom: 14px;
+}
+.reframe h2 em { font-style: italic; color: var(--hc-coral); }
+.reframe p { color: #b3ada2; font-size: 14px; line-height: 1.65; max-width: 680px; }
+
+/* Walkthrough hint */
+.walk-hint {
+  margin-top: 60px; text-align: center;
+  color: #7a7468; font-family: var(--ff-mono);
+  font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+}
+.walk-hint strong { color: var(--hc-coral); font-weight: 600; }
+
+</style>
+</head>
+<body>
+
+<!-- Shared top bar -->
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="landing-stage">
+  <div class="land-inner">
+
+    <section class="land-intro">
+      <span class="eyebrow" data-copy="landing.eyebrow">Prototype for strategic discussion</span>
+      <h1 data-copy-html="landing.headline_html">A coalition loyalty programme built <em>from the customer inwards</em>, not the platform outwards.</h1>
+      <p class="land-sub" data-copy="landing.sub">A 10-minute interactive walkthrough of the HomeClub concept for Leroy Merlin SA, designed and prepared by the CMR Africa team.</p>
+
+      <div class="land-cta">
+        <a class="btn btn-coral" href="app/onboarding.html">
+          <span data-copy="landing.cta_primary">Begin walkthrough</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn-ghost" href="admin/index.html" data-copy="landing.cta_secondary">Skip to admin dashboard</a>
+      </div>
+
+      <div class="land-attribution">
+        <div class="line"></div>
+        <div class="label">
+          <span data-copy="landing.prepared_for">Prepared for</span>
+          <em data-copy="landing.prepared_for_name">Naresh Rocharam, Treasury Manager · Leroy Merlin SA</em>
+          <span style="display:block; margin-top:10px" data-copy="landing.prepared_by">Prepared by the CMR Africa team · April 2026</span>
+        </div>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <section class="land-pillars" aria-label="Three coalition pillars">
+      <!-- pillars rendered by JS -->
+    </section>
+
+    <section class="reframe">
+      <span class="eyebrow" data-copy="landing.reframe_eyebrow">The strategic reframe</span>
+      <h2 data-copy-html="landing.reframe_headline_html"></h2>
+      <p data-copy="landing.reframe_body"></p>
+    </section>
+
+    <div class="walk-hint">
+      <span>The walkthrough takes about <strong>10 minutes</strong></span>
+    </div>
+
+  </div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '', current: 'landing' });
+  await HomeClubApp.initCopy('');
+
+  // Render pillars
+  const copy = HomeClubApp.getCopy();
+  const host = document.querySelector('.land-pillars');
+  if (host && copy.landing && copy.landing.pillars) {
+    host.innerHTML = copy.landing.pillars.map(p => {
+      const statusBadge = p.status === 'Live'
+        ? `<span style="color:#5CC689; font-weight:700">● Live</span>`
+        : `<span class="pilot-badge on-dark">Pilot — in discussion</span>`;
+      return `
+        <article class="pillar">
+          <div class="p-partner">${p.partner} ${statusBadge}</div>
+          <div class="p-verb"><em>${p.verb}</em></div>
+          <p class="p-blurb">${p.blurb}</p>
+        </article>
+      `;
+    }).join('');
+  }
+})();
+
+// Register service worker (best-effort; ignored on file://)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').catch(() => {});
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Coalition · LM + M&B + Decathlon + services</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · Coalition</span>
+    <h1>One currency across <em>three brands</em>. Plus the services that actually build a home.</h1>
+    <p>The coalition isn't just about cross-brand spending — it's about redeeming HomeBucks against contractor bookings, tool hire and workshop seats, not only product discounts.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <header class="app-header">
+        <div>
+          <div class="hi">Your <em>coalition</em></div>
+          <div class="sub" data-copy="coalition.headline_html">One currency. Three brands.</div>
+        </div>
+        <div class="avatar" aria-label="Thandi Mokoena">TM</div>
+      </header>
+
+      <!-- Balance banner -->
+      <div style="margin:0 20px 16px; background: var(--hc-coral-soft); border-radius:14px; padding: 14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px">
+        <div>
+          <div style="font-family:var(--ff-mono); font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase; color:var(--hc-coral-deep); font-weight:600">Balance available to spend</div>
+          <div style="font-family:var(--ff-display); font-size:26px; font-weight:600; letter-spacing:-0.5px; color:var(--hc-charcoal); margin-top:2px">920 <span style="font-family:var(--ff-mono); font-size:10px; letter-spacing:1.5px; color:var(--hc-coral); font-weight:700">HB</span></div>
+        </div>
+        <button class="btn btn-coral" style="font-size:12px; padding:10px 14px">Redeem</button>
+      </div>
+
+      <div class="section-h" style="margin-top:0">
+        <span data-copy="coalition.partners_eyebrow">Earn & spend at</span>
+      </div>
+      <div id="partners"></div>
+
+      <div class="section-h" style="margin-top:16px">
+        <span data-copy="coalition.services_eyebrow">Spend on services, not just products</span>
+      </div>
+      <div id="services" style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px"></div>
+
+      <nav class="tabbar" aria-label="App sections">
+        <a href="home.html"><span class="tb-ico">⌂</span><span>Home</span></a>
+        <a href="project.html"><span class="tb-ico">◎</span><span>Project</span></a>
+        <a href="gamification.html"><span class="tb-ico">◆</span><span>Rewards</span></a>
+        <a class="active" href="coalition.html"><span class="tb-ico">☵</span><span>Coalition</span></a>
+        <a href="events.html"><span class="tb-ico">✺</span><span>Events</span></a>
+      </nav>
+    </div>
+  </div>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'coalition', '../');
+
+  const copy = HomeClubApp.getCopy();
+
+  // Partners
+  document.getElementById('partners').innerHTML = copy.coalition.partners.map(p => {
+    const badge = p.status === 'pilot'
+      ? `<span class="pilot-badge">Pilot — in discussion</span>`
+      : `<span style="color:#2E8B57; font-family:var(--ff-mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; font-weight:700">● Live</span>`;
+    return `
+      <div class="partner-tile ${p.key}">
+        <div class="pt-logo">${p.initials}</div>
+        <div class="pt-body">
+          <div class="pt-name">${p.name} ${badge}</div>
+          <div class="pt-pillar">${p.pillar}</div>
+          <div class="pt-rate">${p.rate}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Services
+  document.getElementById('services').innerHTML = copy.coalition.services.map(s => `
+    <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid rgba(26,22,18,0.07); border-radius:14px; padding:12px 14px; cursor:pointer; transition:transform 0.15s var(--ease-out)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      <div style="width:40px; height:40px; border-radius:10px; background:var(--hc-paper); display:grid; place-items:center; font-size:18px; flex-shrink:0">${s.icon}</div>
+      <div style="flex:1; min-width:0">
+        <div style="font-family:var(--ff-display); font-weight:500; font-size:14px; color:var(--hc-charcoal); letter-spacing:-0.2px">${s.title}</div>
+        <div style="font-size:11px; color:var(--hc-mute); margin-top:2px; line-height:1.4">${s.caption}</div>
+      </div>
+      <div style="font-family:var(--ff-mono); font-size:10px; color:var(--hc-coral); font-weight:700; text-align:right; letter-spacing:0.5px">${s.cost}</div>
+    </div>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

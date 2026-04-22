@@ -1,0 +1,536 @@
+{
+  "_comment": "Editable copy. Team can tweak any string in here without touching engine code. Keys are referenced by data-copy= attributes in HTML and by shared.js.",
+
+  "brand": {
+    "product_name": "HomeClub",
+    "product_parent": "by Leroy Merlin",
+    "tagline_short": "Three brands. One currency. One project at a time.",
+    "tagline_long": "South Africa's first Home + Life coalition rewards ecosystem.",
+    "currency_name": "HomeBucks",
+    "currency_short": "HB"
+  },
+
+  "landing": {
+    "eyebrow": "Prototype for strategic discussion",
+    "headline_html": "A coalition loyalty programme built <em>from the customer inwards</em>, not the platform outwards.",
+    "sub": "A 10-minute interactive walkthrough of the HomeClub concept for Leroy Merlin SA, designed and prepared by the CMR Africa team.",
+    "cta_primary": "Begin walkthrough",
+    "cta_secondary": "Skip to admin dashboard",
+    "prepared_for": "Prepared for",
+    "prepared_for_name": "Naresh Rocharam, Treasury Manager · Leroy Merlin SA",
+    "prepared_by": "Prepared by the CMR Africa team · April 2026",
+    "pillar_eyebrow": "Three pillars",
+    "pillars": [
+      { "verb": "Build it",  "partner": "Leroy Merlin", "status": "Live",   "blurb": "Every tile, tap, tin of paint — earn HomeBucks as you build." },
+      { "verb": "Live in it", "partner": "Mugg & Bean",   "status": "Pilot",  "blurb": "Coffee breaks, family meals, the rituals of the home." },
+      { "verb": "Move in it", "partner": "Decathlon",     "status": "Pilot",  "blurb": "Fitness, outdoor, the garden and the kids — all one currency." }
+    ],
+    "reframe_eyebrow": "The strategic reframe",
+    "reframe_headline_html": "Leroy Merlin already has a loyalty programme. <em>HomeClub is the activation layer on top of it.</em>",
+    "reframe_body": "my Home Card already captures identity and transactions at every till. 95% of that value sits dormant. HomeClub doesn't replace it — it turns a price-gate into a relationship, a coalition, and a source of live customer insight. Cheaper to build, faster to value, better internal story for the CEO."
+  },
+
+  "disclosure": {
+    "line": "Status · Prototype for strategic discussion    ·    All data synthetic    ·    Coalition partners pending confirmation    ·    Prepared by CMR AFRICA for Leroy Merlin SA"
+  },
+
+  "app_nav": {
+    "onboarding":     "Onboard",
+    "home":           "Home",
+    "project":        "Project",
+    "gamification":   "Rewards",
+    "coalition":      "Coalition",
+    "events":         "Events"
+  },
+
+  "onboarding": {
+    "steps": [
+      {
+        "eyebrow": "Step 1 of 3",
+        "headline_html": "You're already <em>a my Home Card member</em>.",
+        "body": "Since you downloaded the Leroy Merlin app and registered, you've been unlocking loyalty pricing at every till. Nothing changes — your my Home Card stays exactly as it is.",
+        "cta": "Continue"
+      },
+      {
+        "eyebrow": "Step 2 of 3",
+        "headline_html": "Now meet <em>HomeClub</em>.",
+        "body": "A new layer on top of my Home Card. The same identity, the same app, upgraded. You now earn HomeBucks on every rand you spend, start project windows that double your earn rate, and share points with Mugg & Bean and Decathlon.",
+        "cta": "Continue"
+      },
+      {
+        "eyebrow": "Step 3 of 3",
+        "headline_html": "You're in the <em>NEST</em> tier — free, and here's what's waiting.",
+        "body": "1% back on everything. Monthly workshops. Birthday coffee at Mugg & Bean. Unlock HOME after your first completed project, and HOMESTEAD once you're all-in on the house.",
+        "cta": "Open my HomeClub"
+      }
+    ]
+  },
+
+  "home_screen": {
+    "greet_html": "Hi, <em>Thandi</em>",
+    "greet_sub": "Day 14 of your Paint a Room project",
+    "balance_caption": "Earn 2× during your active project window",
+    "next_tier": "HOME",
+    "next_tier_caption": "Finish a project to unlock",
+    "shortcut_eyebrow": "Shortcuts",
+    "shortcuts": [
+      { "icon": "📍", "label": "Find your store",   "caption": "Fourways · 12 min" },
+      { "icon": "🎟️", "label": "Scan to earn",       "caption": "At any till" },
+      { "icon": "🧰", "label": "Book a tool day",   "caption": "Coastal Hire · 800 HB" },
+      { "icon": "☕", "label": "Coffee break",       "caption": "Free at M&B today" }
+    ],
+    "activity_eyebrow": "Recent activity",
+    "recent_activity": [
+      { "icon": "🎨", "title": "Dulux Weatherguard 5L", "caption": "Paint project · 2× earn", "hb": "+340 HB", "pos": true },
+      { "icon": "☕", "title": "Morning filter coffee",  "caption": "Mugg & Bean · Fourways",   "hb": "+12 HB",  "pos": true },
+      { "icon": "🧰", "title": "Rotary sander · 1 day",  "caption": "Coastal Hire redemption", "hb": "−800 HB", "pos": false },
+      { "icon": "🧱", "title": "Ceramic wall tile 25m²", "caption": "Cutting & Edging service", "hb": "+180 HB", "pos": true },
+      { "icon": "🎓", "title": "Colour Confidence workshop", "caption": "Attended Sat 05 Apr",   "hb": "+100 HB", "pos": true }
+    ]
+  },
+
+  "project_engine": {
+    "eyebrow": "The Project Engine",
+    "headline_html": "Scan a project barcode. Get a <em>90-day window</em> that doubles your earn.",
+    "barcode_title": "Bathroom Renovation",
+    "barcode_caption": "Starts the moment you scan in-aisle. Every partner spend counts for 90 days.",
+    "active_title": "Paint a Room",
+    "active_caption_html": "Day 14 of 90 · <em>2× HomeBucks</em> on paint, prep & finishing",
+    "timeline_eyebrow": "Your project so far",
+    "timeline": [
+      { "day": "D1",  "label": "Scanned in-aisle", "caption": "Bathroom endcap, Fourways — project opened",        "earn": "+50 HB",   "pos": true },
+      { "day": "D2",  "label": "Colour Confidence workshop",  "caption": "Book-ahead workshop at store",                     "earn": "+100 HB",  "pos": true },
+      { "day": "D5",  "label": "Dulux Weatherguard 5L",  "caption": "2× coral ticket — Project Bonus",                  "earn": "+340 HB",  "pos": true },
+      { "day": "D9",  "label": "Kandua contractor enquiry", "caption": "Matched a painter in your suburb",                 "earn": "+25 HB",   "pos": true },
+      { "day": "D14", "label": "Currently in-flight", "caption": "Roller kit, drop sheet & sugar soap in basket",     "earn": "pending",  "pos": true }
+    ],
+    "timeline_rewards_eyebrow": "What unlocks when you finish",
+    "timeline_rewards": [
+      { "when": "D45", "label": "Halfway bonus",    "caption": "+150 HB and a free M&B filter coffee",                   "earn": "+150 HB" },
+      { "when": "D90", "label": "Project completion", "caption": "+500 HB, 5% back at Decathlon, draw entry for R50k",    "earn": "+500 HB" },
+      { "when": "D90+", "label": "Share before/after", "caption": "Earn 200 HB and become a HomeClub Voices creator",     "earn": "+200 HB" }
+    ]
+  },
+
+  "gamification": {
+    "eyebrow": "Rewards & Streaks",
+    "headline_html": "Badges for buyers who <em>build better homes</em>.",
+    "streak_flame": "🔥",
+    "streak_count_html": "<em>3 weeks</em>",
+    "streak_caption": "You've visited Leroy Merlin at least once a week for 3 weeks running. One more week and you unlock the Committed Builder badge.",
+    "badges_earned_eyebrow": "Earned",
+    "badges_progress_eyebrow": "In progress",
+    "challenges_eyebrow": "This week's challenges",
+    "challenges": [
+      {
+        "eyebrow": "Aisle hunt · Fourways",
+        "title": "Scan 3 paint aisles",
+        "body": "Walk aisles 42, 43 and 44. Scan the QR sticker on each — earn 150 HB and a 10% off next visit nudge.",
+        "reward": "150 HB",
+        "cta": "Start hunt"
+      },
+      {
+        "eyebrow": "Coalition combo",
+        "title": "Home + Coffee",
+        "body": "Spend at Leroy Merlin and Mugg & Bean in the same 24 hours this weekend. Unlock a 300 HB bonus.",
+        "reward": "300 HB",
+        "cta": "I'm in"
+      },
+      {
+        "eyebrow": "Project-adjacent",
+        "title": "Colour your world",
+        "body": "Attend this Saturday's Colour Confidence workshop at Fourways. 100 HB + a Dulux sample set to take home.",
+        "reward": "100 HB + kit",
+        "cta": "Book seat"
+      }
+    ],
+    "badges": [
+      { "icon": "🎨", "name": "Colour Confident", "progress": "Earned", "status": "earned" },
+      { "icon": "🧰", "name": "First Project",    "progress": "Earned", "status": "earned" },
+      { "icon": "☕", "name": "Coffee Ritual",     "progress": "Earned", "status": "earned" },
+      { "icon": "💧", "name": "Water Warrior",    "progress": "1 of 3 eco-purchases", "status": "progress" },
+      { "icon": "⚡", "name": "Energy Warrior",   "progress": "0 of 3 eco-purchases", "status": "progress" },
+      { "icon": "🌱", "name": "Garden Builder",    "progress": "2 of 4 outdoor items", "status": "progress" },
+      { "icon": "🏗️", "name": "Committed Builder", "progress": "3 of 4 weekly visits", "status": "progress" },
+      { "icon": "🔧", "name": "Tool Master",      "progress": "Rent 3 tools", "status": "locked" },
+      { "icon": "🏛️", "name": "HOMESTEAD",          "progress": "Upgrade tier", "status": "locked" }
+    ]
+  },
+
+  "coalition": {
+    "eyebrow": "Your coalition",
+    "headline_html": "One currency. <em>Three brands.</em> Plus the services that actually build a home.",
+    "partners_eyebrow": "Earn & spend at",
+    "partners": [
+      { "key": "lm",  "name": "Leroy Merlin", "pillar": "Build it",  "rate": "<strong>1 HB per R1</strong>   ·   2× during project windows", "status": "live",  "initials": "LM" },
+      { "key": "mb",  "name": "Mugg & Bean",  "pillar": "Live in it", "rate": "<strong>1 HB per R5</strong>   ·   Free birthday coffee",       "status": "pilot", "initials": "MB" },
+      { "key": "dec", "name": "Decathlon",    "pillar": "Move in it", "rate": "<strong>1 HB per R2</strong>   ·   Kids' range 10% off at HOME", "status": "pilot", "initials": "DC" }
+    ],
+    "services_eyebrow": "Spend your HomeBucks on services, not just products",
+    "services": [
+      { "icon": "👷", "title": "Kandua contractor match",      "caption": "We pay the booking fee. Earn 5% back as HB.",               "cost": "Kandua partner · 0 HB out" },
+      { "icon": "🧰", "title": "Coastal Hire tool day",         "caption": "Any tool, any store. Standard redemption option.",           "cost": "800 HB" },
+      { "icon": "✂️", "title": "Cutting & Edging Workshop credit", "caption": "10-piece cut & edge bundle at your home store.",            "cost": "400 HB" },
+      { "icon": "🎨", "title": "Saturday workshop seat",         "caption": "Colour, tiling, decking or planter-box — your choice.",      "cost": "250 HB" },
+      { "icon": "🏡", "title": "HOMESTEAD design consult",         "caption": "One 60-min session with a Leroy Merlin designer.",           "cost": "950 HB · HOMESTEAD only" },
+      { "icon": "🛡️", "title": "Extended returns window",        "caption": "Upgrade from 3 → 6 → 12 months by tier.",                     "cost": "Included by tier" }
+    ]
+  },
+
+  "events": {
+    "eyebrow": "Experiences",
+    "headline_html": "Redeem HomeBucks for <em>the real-world moments</em> that inspire projects.",
+    "events_caption": "Dates drawn from publicly-listed 2026 schedules where confirmed; others are illustrative and marked as such.",
+    "events": [
+      {
+        "month": "May", "day": "28",  "year": "2026",
+        "name": "Design Joburg",
+        "meta": "Sandton Convention Centre · 28–31 May 2026",
+        "cost": "400 HB · 2-day pass",
+        "status": "confirmed"
+      },
+      {
+        "month": "Aug", "day": "06",  "year": "2026",
+        "name": "Decorex Johannesburg",
+        "meta": "Gallagher Convention Centre · 6–10 August 2026",
+        "cost": "350 HB · single day",
+        "status": "confirmed"
+      },
+      {
+        "month": "Aug", "day": "21",  "year": "2026",
+        "name": "Homemakers Expo Joburg",
+        "meta": "Kyalami Grand Prix Circuit · 21–24 August (typical) — dates TBC",
+        "cost": "280 HB · single day",
+        "status": "illustrative"
+      },
+      {
+        "month": "Sep", "day": "05",  "year": "2026",
+        "name": "House & Garden Show · Cape Town",
+        "meta": "CTICC · 5–7 September (typical) — dates TBC",
+        "cost": "320 HB · 3-day pass",
+        "status": "illustrative"
+      },
+      {
+        "month": "Jun", "day": "13",  "year": "2026",
+        "name": "HomeStead Days · Fourways",
+        "meta": "HomeClub-exclusive · HOMESTEAD tier only",
+        "cost": "Included — invite only",
+        "status": "exclusive"
+      },
+      {
+        "month": "Jul", "day": "18",  "year": "2026",
+        "name": "Colour Confidence Masterclass",
+        "meta": "Saturday workshop series · all 6 stores",
+        "cost": "250 HB · +100 HB if you finish a paint project in 30 days",
+        "status": "confirmed"
+      }
+    ]
+  },
+
+  "admin_nav": {
+    "overview": "Overview",
+    "members":  "Members",
+    "why_cmr":  "Why CMR Africa"
+  },
+
+  "admin_overview": {
+    "eyebrow": "Admin Dashboard",
+    "headline": "HomeClub · Pilot wave",
+    "sub": "Live-view of the Leroy Merlin SA HomeClub pilot — 320 activated members across six stores",
+    "live_label": "Live data · Seed 20260421",
+    "kpis": [
+      { "label": "Active members",           "value": "320",      "unit": "",         "trend": "+48 this week",    "dir": "up"       },
+      { "label": "HomeBucks issued · MTD",   "value": "847K",     "unit": "HB",       "trend": "+12.4% vs prior",  "dir": "up"       },
+      { "label": "Avg monthly spend",         "value": "R1,820",   "unit": "",         "trend": "Truth benchmark",  "dir": "neutral"  },
+      { "label": "Cross-partner spend share","value": "27",       "unit": "%",        "trend": "Target 40% by Q4", "dir": "up"       }
+    ],
+    "hero_kpi": {
+      "label": "my Home Card → HomeClub conversion",
+      "value": "73",
+      "unit": "%",
+      "caption_html": "<strong>The number Naresh takes to the CEO.</strong>  320 of 438 pilot-targeted my Home Card members activated HomeClub within 14 days of invite."
+    },
+    "insight_eyebrow": "CMR Africa · Weekly Insight",
+    "insight_rotator": [
+      {
+        "headline_html": "Project-active members spend <em>3.4× more per week</em> than non-project members.",
+        "body_html": "Across our 320-member pilot cohort, <strong>134 members currently in an active 90-day project</strong> spent an average of <strong>R2,840 per week</strong>, versus <strong>R820</strong> for members without an active project. The multiplier is largest in the Bathroom Renovation and Kitchen Upgrade categories.",
+        "foot": "Behavioural insight · weighted by store · panel n=320"
+      },
+      {
+        "headline_html": "Coalition cross-shoppers are <em>four times more likely</em> to hit HOME tier.",
+        "body_html": "Members who transacted at <strong>both Leroy Merlin and Mugg & Bean</strong> in the first 30 days reached HOME tier in <strong>62 days on average</strong>, versus <strong>248 days</strong> for single-brand shoppers. The coffee-break shopper is not a curio — it's the fastest tier-progression funnel in the model.",
+        "foot": "Tier progression velocity · pilot cohort · 30-day cross-shop window"
+      },
+      {
+        "headline_html": "Lapsed-member reactivation rate is <em>14%</em> — with the right nudge.",
+        "body_html": "Members inactive for 60+ days responded to an <strong>unfinished-project nudge</strong> with a 500 HB booster at 14.3% — far above the <strong>2–4% baseline</strong> for generic email campaigns. The trigger is the unfinished project, not the points. This is what no rewards platform can do on its own.",
+        "foot": "Reactivation test · n=112 lapsed members · 7-day response window"
+      },
+      {
+        "headline_html": "Eco-product buyers <em>progress tiers 2.1× faster</em> than matched non-eco buyers.",
+        "body_html": "Members who buy <strong>Water Warrior or Energy Warrior</strong> badge products (Solo Sanitaryware Eco Range, inverters, LED retrofits, water tanks) hit HOMESTEAD in <strong>7.8 months</strong>, versus 16.4 months for matched control. Sustainability is a <strong>tier-progression accelerant</strong>, not a virtue signal.",
+        "foot": "Eco-purchase × tier correlation · n=128 eco-buyers · control matched on store + tenure"
+      }
+    ],
+    "panels": {
+      "growth_title": "Member growth · 14 weeks",
+      "growth_sub":   "320 activated · 134 in active project",
+      "earnburn_title": "Earn vs. burn · by partner · MTD",
+      "earnburn_sub":   "HomeBucks flow through the coalition",
+      "store_title":    "Store performance · 6 stores",
+      "store_sub":      "Members + active projects",
+      "tier_title":     "Tier distribution",
+      "tier_sub":       "68 / 26 / 6 — realistic year-1 shape",
+      "proj_title":     "Project categories",
+      "proj_sub":       "Weighted by in-app starts"
+    }
+  },
+
+  "admin_members": {
+    "eyebrow": "Members",
+    "headline": "Member explorer",
+    "sub": "320 activated HomeClub members · 12 spotlight profiles with full behavioural notes · filter and click through any row",
+    "search_placeholder": "Search by name, ID or store…",
+    "spotlight_caption": "Coral stripe = CMR Africa spotlight profile (full behavioural notes).",
+    "filters": [
+      { "key": "all",       "label": "All (320)" },
+      { "key": "spotlight", "label": "Spotlight (12)" },
+      { "key": "nest",      "label": "NEST" },
+      { "key": "home",      "label": "HOME" },
+      { "key": "homestead", "label": "HOMESTEAD" },
+      { "key": "project",   "label": "In project" },
+      { "key": "lapsed",    "label": "Churn risk" }
+    ]
+  },
+
+  "why_cmr": {
+    "eyebrow": "Why CMR Africa",
+    "headline_html": "We don't compete with the rewards platform. <em>We sit upstream of it.</em>",
+    "sub": "TLC Worldwide Africa build the experience layer. Truth Loyalty build the strategy frameworks. CMR Africa builds the consumer insight layer that makes both of them work harder.",
+    "three": [
+      {
+        "n": "01",
+        "title": "Pan-African consumer panel",
+        "body": "A proprietary digital research panel reaching 140,000+ consumers across South Africa, Kenya, Nigeria, Ghana and Côte d'Ivoire. No other local partner can answer \"what's happening in Cornubia vs. Fourways vs. Pretoria\" with statistically valid segments, in a week."
+      },
+      {
+        "n": "02",
+        "title": "Qualitative depth, not just dashboards",
+        "body": "Our Bra Bens arm runs in-home ethnography, retail mystery shopping, and creative discovery workshops. The Weekly Insight panel in your dashboard isn't a chart — it's a human story, surfaced weekly by real researchers."
+      },
+      {
+        "n": "03",
+        "title": "Creative delivery under one roof",
+        "body": "Mystery-shop reports as visual storyboards, not 60-page Word docs. Campaign concepting baked into the insight. When the insight says \"this segment wants water resilience first,\" we can build the Dulux-Jojo creative the same week."
+      }
+    ],
+    "compare_title": "How we each address Leroy Merlin's brief",
+    "compare": {
+      "headers": ["", "TLC Worldwide", "Truth Loyalty", "CMR Africa"],
+      "rows": [
+        ["Core offer",           "COSMOS rewards platform",      "Consulting + SA Loyalty Awards IP", "Upstream insight + creative"],
+        ["Starts from",          "Tech stack and experiences",   "Frameworks and research",           "The member's actual day"],
+        ["Fits where in the brief", "Rewards execution",            "Strategic diagnosis",                "Segmentation, activation, storytelling"],
+        ["Data they bring",      "Platform telemetry",           "Industry benchmarks",                "140k-strong panel + qual"],
+        ["Mystery shopping?",    "No",                           "Third-party",                         "In-house (Bra Bens)"],
+        ["Price posture",        "Platform-led SaaS",            "Consultancy day-rates",               "Insight-subscription + project"]
+      ]
+    },
+    "closing_title": "The recommendation we're bringing Leroy Merlin",
+    "closing_body": "Commission TLC (or whoever LM chooses) to run the rewards platform. Commission CMR Africa as the insight and strategy layer that feeds it the right campaigns, the right segments, and the right stories — week after week. Same brief, sharper answer."
+  },
+
+  "mystery_shop": {
+    "eyebrow": "Mystery Shop · Fourways · 21 April 2026",
+    "headline_html": "A creative visual report, <em>not a 60-page Word doc</em>.",
+    "sub": "One of six store reports per quarter — Instagram-carousel format, designed to be forwarded without translation. Observations drawn from a live 90-minute shop at Fourways.",
+    "visit_meta": {
+      "store": "Fourways",
+      "date": "21 April 2026, 10:30 — 12:00",
+      "shopper": "CMR Africa field researcher · Bra Bens",
+      "mode": "Solo unaccompanied visit · fresh eyes protocol",
+      "weather": "Sunny · 24°C · post-school-holiday Tuesday"
+    },
+    "overall": {
+      "headline_html": "Fourways feels like a <em>destination</em>, not a hardware run.",
+      "score": "8.2",
+      "score_unit": "/10",
+      "score_label": "Overall store experience",
+      "summary": "The single most retail-theatrical big-box DIY store in South Africa. Investment in ambient design (neon, festoon lighting, flower zone, Mugg & Bean destination) is far ahead of peers — but the operational layers on top (loyalty, wayfinding, digital, personalisation) have not caught up. HomeClub's job is to match the theatre with the data."
+    },
+    "cards": [
+      {
+        "n": "01",
+        "zone": "Entrance & flower zone",
+        "obs": "Neon \"Electric Butterfly Flowers\" + \"#PetalPowered\" + Edison bulb festoon + Pick me UP! cart. This is better retail theatre than most clothing stores on Sandton Drive.",
+        "finding": "Shoppers photograph this on the way in. Free earned media, zero gamification layer.",
+        "homeclub": "Add a photographable \"Scan to start a project\" neon cube at the flower zone exit. First project started in-store = 100 HB bonus + a Pick me UP! bloom.",
+        "tone": "strength",
+        "score": 9.1
+      },
+      {
+        "n": "02",
+        "zone": "my Home Card signage",
+        "obs": "\"my Home Card — Want to join the club? More benefits to make your home the best place to live.\" Every red PROMO ticket carries \"ALL PROMOTIONS ARE EXCLUSIVE TO LOYALTY MEMBERS.\"",
+        "finding": "Identity and transaction data is being captured at every till. 95%+ of the relational value is dormant.",
+        "homeclub": "HomeClub doesn't replace my Home Card — it activates it. Same card, same barcode, new behaviours on top.",
+        "tone": "strategic",
+        "score": 6.4
+      },
+      {
+        "n": "03",
+        "zone": "Pricing tickets",
+        "obs": "Two colours in use: green \"1st Price\" (normal) + red strike-through (promo, loyalty-exclusive). Template is consistent, crisp, branded.",
+        "finding": "Visual system is strong and respected by ops. Room for a third colour without disruption.",
+        "homeclub": "Add coral \"2× HomeBucks\" ticket for items inside a member's active project window. Same template, orange band. See the In-store Pricing screen for the full mockup.",
+        "tone": "opportunity",
+        "score": 7.8
+      },
+      {
+        "n": "04",
+        "zone": "Kandua contractor endcaps",
+        "obs": "Bathroom and tile endcaps both carry \"Need a contractor? Make the smart choice with Kandua\" and \"Standard installation fees available.\"",
+        "finding": "Co-brand is already live. No digital handoff — customer has to leave the aisle to book.",
+        "homeclub": "Wire Kandua into the app: scan endcap QR → match contractor in customer's suburb → 5% back as HomeBucks. Zero friction, shared revenue.",
+        "tone": "opportunity",
+        "score": 7.0
+      },
+      {
+        "n": "05",
+        "zone": "Coastal Hire endcap",
+        "obs": "\"Need to rent professional tools? We've got you covered with Coastal Hire\" — clean co-branded endcap. No digital booking path visible in-store.",
+        "finding": "A second live partnership that's currently print-only. Natural HB redemption candidate.",
+        "homeclub": "One of the first HomeBucks redemptions we prototype: 800 HB = a tool day. Shows coalition working beyond coffee.",
+        "tone": "opportunity",
+        "score": 6.8
+      },
+      {
+        "n": "06",
+        "zone": "Mugg & Bean destination",
+        "obs": "Full café (not a kiosk): ~40 seats, bakery counter, digital menu boards, muffin-wall mural, positioned near Exit. Real dwell-time zone.",
+        "finding": "Customers are already pairing shopping with a coffee. The coalition behaviour is live; the data isn't shared.",
+        "homeclub": "Coalition unlock moment #1. Shared identity + shared currency turns a coincidence into a coalition.",
+        "tone": "strength",
+        "score": 8.9
+      },
+      {
+        "n": "07",
+        "zone": "Cutting & Edging Workshop",
+        "obs": "In-store paid service, tiered pricing (10–20 / 20–30 / 30–50 / 50+ pieces). Dedicated counter with Austro edge-banding machinery.",
+        "finding": "Premium service with no loyalty mechanic layered over it. HOMESTEAD members should be paying for this with HB.",
+        "homeclub": "A 10-piece cut-and-edge bundle at 400 HB. Demonstrates HB earn-and-burn on services, not SKUs.",
+        "tone": "opportunity",
+        "score": 7.5
+      },
+      {
+        "n": "08",
+        "zone": "Aisle wayfinding",
+        "obs": "Beautifully typeset black-and-white hanging signs (28 Moving boxes, 30 Glue/Tape, 61 Carpentry, 63 Exterior Doors). Entirely static. No screens. No QR. No loops.",
+        "finding": "Biggest single gap between LM's ambition and LM's execution. The store is analogue above the shelf.",
+        "homeclub": "QR-sticker every aisle sign. \"Scan this aisle for today's bonus\" becomes the default treasure hunt mechanic. 50–150 HB per challenge.",
+        "tone": "gap",
+        "score": 4.2
+      },
+      {
+        "n": "09",
+        "zone": "Sustainability narrative",
+        "obs": "Water tanks displayed outside entrance. Solo Sanitaryware Eco Range (3.5L / 5L flush), Maldives water-saving toilets, Naterial artificial grass, Luxens paints — all visible.",
+        "finding": "Dufourq's three missions are already in the store. No connective storytelling above the shelf.",
+        "homeclub": "Water Warrior and Energy Warrior badges turn these SKUs into a journey. Eco-buyers progress tiers 2.1× faster in our model.",
+        "tone": "strength",
+        "score": 8.5
+      },
+      {
+        "n": "10",
+        "zone": "Seasonal campaign",
+        "obs": "April BOGO campaign: \"Fix your 'I'll fix it later' this April\" — playful, confident copy. Matches LM's retail-theatre tone.",
+        "finding": "Copy voice is confident and specific. HomeClub must match, not flatten.",
+        "homeclub": "HomeClub copy system inherits the playful voice: \"Your weekend called, it wants a project\" on push notifications; \"Coffee-while-you-shop\" on coalition bundles.",
+        "tone": "strength",
+        "score": 8.0
+      }
+    ],
+    "scorecard": [
+      { "dim": "Retail theatre",        "v": 9.1, "note": "Best in SA DIY" },
+      { "dim": "Pricing clarity",       "v": 7.8, "note": "Two-colour system works" },
+      { "dim": "Coalition readiness",   "v": 7.4, "note": "M&B, Kandua, Coastal all in-store" },
+      { "dim": "Loyalty activation",    "v": 4.6, "note": "Data captured, not used" },
+      { "dim": "Digital/wayfinding",    "v": 3.9, "note": "Analogue above the shelf" },
+      { "dim": "Sustainability story",  "v": 8.5, "note": "SKUs present, narrative missing" },
+      { "dim": "Staff visibility",      "v": 6.8, "note": "Present but not proactive" },
+      { "dim": "Service experience",    "v": 7.5, "note": "Cutting & Edging is quietly excellent" }
+    ],
+    "shopper_quote": "Fourways spends like a retailer that wants to be more than a hardware store. But the moment I leave the entrance I'm back in 2010 — numbers hanging from the ceiling, paper tickets on shelves, and no one app-nudging me toward my project. HomeClub is the layer that makes the ambition legible.",
+    "shopper_name": "CMR Africa field researcher · 21 April 2026",
+    "closing": "Fourways is not a brief for a new loyalty programme. It's a brief for a connective layer over a store that already has 80% of what it needs."
+  },
+
+  "in_store": {
+    "eyebrow": "In-store pricing layer",
+    "headline_html": "Three colours. <em>Zero operational disruption.</em>",
+    "sub": "Leroy Merlin already runs a two-colour price ticket system — green for normal pricing, red for promotions. HomeClub adds a third colour — coral — for items that earn 2× HomeBucks during a member's active project window. Same template, same barcode, same ops flow.",
+    "tickets": [
+      {
+        "colour": "green",
+        "label": "1st Price",
+        "tag": "Normal pricing",
+        "who": "Everyone",
+        "product": "Dulux Weatherguard 5L White",
+        "price": "R 649",
+        "was": null,
+        "save": null,
+        "note": "Standard everyday price. No fine print."
+      },
+      {
+        "colour": "red",
+        "label": "Promo",
+        "tag": "Loyalty-exclusive promotional price",
+        "who": "my Home Card members",
+        "product": "Dulux Weatherguard 5L White",
+        "price": "R 549",
+        "was": "R 649",
+        "save": "R 100",
+        "note": "ALL PROMOTIONS ARE EXCLUSIVE TO LOYALTY MEMBERS — existing standard fine-print line."
+      },
+      {
+        "colour": "coral",
+        "label": "2× HomeBucks",
+        "tag": "Project Bonus — coral ticket (new)",
+        "who": "HomeClub members in an active project window",
+        "product": "Dulux Weatherguard 5L White",
+        "price": "R 549",
+        "was": "R 649",
+        "save": "R 100 + 549 HB",
+        "note": "EARNS 2× DURING YOUR ACTIVE PROJECT WINDOW — HomeClub addition. Same promo mechanic, layered earn.",
+        "highlight": true
+      }
+    ],
+    "principles": [
+      {
+        "n": "01",
+        "title": "Zero ops disruption",
+        "body": "Coral uses the identical template as green and red — same dimensions, same barcode placement, same POS integration. If ops can print a red ticket, they can print a coral one."
+      },
+      {
+        "n": "02",
+        "title": "Additive, not replacement",
+        "body": "Coral doesn't replace red. A promotional item inside a project window carries a coral ticket (promo + 2× earn stacked); outside a project window, the same item carries its red ticket (promo only). One SKU, one or two tickets depending on the season."
+      },
+      {
+        "n": "03",
+        "title": "Visible only where it matters",
+        "body": "Coral tickets only go on ~4-6% of SKUs per category — the ones anchored to the top project categories (paint, bath, garden, kitchen). This keeps the signal-to-noise high and the operational load light."
+      }
+    ],
+    "aisle_eyebrow": "Gamification layer above the shelf",
+    "aisle_title_html": "Turn the aisle sign into a <em>scan point</em>.",
+    "aisle_body": "Fourways has beautifully typeset hanging aisle signs (28 Moving boxes, 30 Glue/Tape, 61 Carpentry, 63 Exterior Doors). They're entirely static. One QR sticker per sign — printed and affixed in a weekend — turns every aisle into a gamification surface.",
+    "aisle_ideas": [
+      { "icon": "🎯", "title": "Scan this aisle",       "body": "50–150 HB per completed aisle challenge. Refreshes weekly." },
+      { "icon": "🧭", "title": "Treasure hunt mode",     "body": "Find all 5 marked aisles in one visit → 500 HB + M&B coffee." },
+      { "icon": "🎨", "title": "Category of the week",   "body": "Whole category (e.g. Paint) runs 1.5× earn for all HomeClub members for 7 days." },
+      { "icon": "📸", "title": "Share the before",       "body": "Post a before-shot of your project zone → 100 HB + creator tag." }
+    ]
+  }
+}

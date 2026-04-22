@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<title>HomeClub · Admin · Member explorer</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="admin-stage">
+
+  <header class="admin-header">
+    <div class="ah-left">
+      <span class="eyebrow ah-eyebrow" data-copy="admin_members.eyebrow">Members</span>
+      <h1 data-copy="admin_members.headline">Member explorer</h1>
+      <div class="ah-sub" data-copy="admin_members.sub">320 activated HomeClub members · filter, search, click any row to see behavioural notes.</div>
+    </div>
+    <div class="ah-actions">
+      <span class="ah-live"><span class="pulse" aria-hidden="true"></span>Live · Seed 20260421</span>
+    </div>
+  </header>
+
+  <nav class="admin-subnav" aria-label="Admin sections">
+    <a href="index.html" data-copy="admin_nav.overview">Overview</a>
+    <a href="members.html" class="current" data-copy="admin_nav.members">Members</a>
+    <a href="mystery-shop.html">Mystery Shop</a>
+    <a href="why-cmr.html" data-copy="admin_nav.why_cmr">Why CMR Africa</a>
+  </nav>
+
+  <div class="admin-main">
+
+    <div class="members-panel">
+      <div class="members-toolbar">
+        <input type="search" class="search-input" id="searchInput" placeholder="Search by name, ID or store…" aria-label="Search members">
+        <div class="filter-chips" id="chips"></div>
+        <div style="font-family:var(--ff-mono); font-size:10px; letter-spacing:1.3px; color:var(--d-text-mute); text-transform:uppercase" id="resultCount">320 of 320</div>
+      </div>
+
+      <div class="members-table-wrap">
+        <table class="members-table" id="membersTable">
+          <thead>
+            <tr>
+              <th style="width: 30%">Member</th>
+              <th>Tier</th>
+              <th>Store</th>
+              <th>Project</th>
+              <th>HB balance</th>
+              <th>Total spend</th>
+              <th>Persona / last seen</th>
+            </tr>
+          </thead>
+          <tbody id="membersTbody"></tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:10px; font-family:var(--ff-mono); font-size:10px; letter-spacing:1.3px; text-transform:uppercase; color:var(--d-text-mute)" data-copy="admin_members.spotlight_caption">Coral stripe = CMR Africa spotlight profile (full behavioural notes).</div>
+    </div>
+
+  </div>
+
+  <!-- Drawer -->
+  <aside class="member-drawer" id="drawer" aria-label="Member detail">
+    <button class="drawer-close" id="drawerClose" aria-label="Close drawer">← Back</button>
+    <div id="drawerBody"></div>
+  </aside>
+  <div class="member-backdrop" id="backdrop"></div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'admin' });
+  await HomeClubApp.initCopy('../');
+
+  const copy = HomeClubApp.getCopy();
+  const d = HomeClubData;
+
+  // ---- Filter state ----
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  // Chips
+  const chips = document.getElementById('chips');
+  chips.innerHTML = copy.admin_members.filters.map((f, i) =>
+    `<button class="chip ${i===0 ? 'active' : ''}" data-filter="${f.key}">${f.label}</button>`
+  ).join('');
+  chips.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (!b) return;
+    chips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    b.classList.add('active');
+    currentFilter = b.dataset.filter;
+    render();
+  });
+
+  // Search
+  document.getElementById('searchInput').addEventListener('input', e => {
+    currentSearch = e.target.value.toLowerCase().trim();
+    render();
+  });
+
+  // ---- Row click → drawer ----
+  const drawer    = document.getElementById('drawer');
+  const backdrop  = document.getElementById('backdrop');
+  const drawerBody = document.getElementById('drawerBody');
+
+  function openDrawer(m){
+    const isSpotlight = !!m.bio;
+    drawerBody.innerHTML = `
+      <div class="d-eyebrow">${isSpotlight ? 'Spotlight profile · ' + (m.persona || '') : 'Member record'}</div>
+      <h3>${m.name}</h3>
+      <div class="d-id">${m.id} · ${m.store}</div>
+
+      <div class="d-meta-grid">
+        <div class="d-meta"><div class="ml">Tier</div><div class="mv">${m.tier}</div></div>
+        <div class="d-meta"><div class="ml">HB balance</div><div class="mv">${m.hbBalance.toLocaleString()} HB</div></div>
+        <div class="d-meta"><div class="ml">Total spend</div><div class="mv">R${m.totalSpend.toLocaleString()}</div></div>
+        <div class="d-meta"><div class="ml">Active project</div><div class="mv" style="font-size:14px">${m.project ? m.project + ' · D' + m.projectDay : '—'}</div></div>
+      </div>
+
+      ${isSpotlight ? `
+        <h4>Member story</h4>
+        <div class="d-bio">${m.bio}</div>
+        <h4>CMR Africa insight</h4>
+        <div class="d-insight"><strong>Why this member matters:</strong> ${m.insight}</div>
+      ` : `
+        <h4>Record</h4>
+        <div class="d-insight" style="border-color:rgba(122,128,144,0.3); background:rgba(255,255,255,0.02); color:var(--d-text-mute)">
+          Lighter record — one of the 308 non-spotlight members in the pilot cohort. In a live deployment this drawer would pull full transaction history, project timeline, and predicted next-purchase category from the CMR Africa insight layer.
+        </div>
+      `}
+    `;
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+  }
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ---- Render table ----
+  const tbody = document.getElementById('membersTbody');
+  const resultCount = document.getElementById('resultCount');
+
+  function matches(m){
+    if (currentFilter === 'spotlight' && !m.bio) return false;
+    if (currentFilter === 'nest'      && m.tier !== 'NEST') return false;
+    if (currentFilter === 'home'      && m.tier !== 'HOME') return false;
+    if (currentFilter === 'homestead' && m.tier !== 'HOMESTEAD') return false;
+    if (currentFilter === 'project'   && !m.project) return false;
+    if (currentFilter === 'lapsed'    && !m.isLapsed) return false;
+    if (currentSearch) {
+      const hay = (m.name + ' ' + m.id + ' ' + m.store).toLowerCase();
+      if (!hay.includes(currentSearch)) return false;
+    }
+    return true;
+  }
+
+  function render(){
+    const list = d.MEMBERS.filter(matches);
+    resultCount.textContent = list.length + ' of ' + d.MEMBERS.length;
+    // Cap visible rows to 80 for performance; show note if truncated
+    const capped = list.slice(0, 80);
+    tbody.innerHTML = capped.map(m => {
+      const isSpotlight = !!m.bio;
+      const lastSeen = m.lastVisitLabel || (isSpotlight ? (m.joinedDays + 'd member') : '—');
+      const projBadge = m.isLapsed
+        ? '<span class="proj-badge churn">Churn risk</span>'
+        : m.project
+          ? `<span class="proj-badge">${m.project} · D${m.projectDay}</span>`
+          : '<span class="proj-badge none">—</span>';
+      return `
+        <tr class="${isSpotlight ? 'spotlight' : ''}" data-id="${m.id}">
+          <td>
+            <span class="member-avatar-sm">${m.initials}</span>
+            <span style="font-weight:500">${m.name}</span>
+            <span style="font-family:var(--ff-mono); font-size:10px; color:var(--d-text-mute); margin-left:6px">${m.id}</span>
+          </td>
+          <td><span class="tier-pill ${m.tier.toLowerCase()}">${m.tier}</span></td>
+          <td>${m.store}</td>
+          <td>${projBadge}</td>
+          <td class="amount-mono">${m.hbBalance.toLocaleString()} HB</td>
+          <td class="amount-mono">R${m.totalSpend.toLocaleString()}</td>
+          <td style="color:var(--d-text-mute); font-family:var(--ff-mono); font-size:10.5px">${isSpotlight ? m.persona : lastSeen}</td>
+        </tr>
+      `;
+    }).join('');
+
+    if (list.length > 80) {
+      tbody.insertAdjacentHTML('beforeend', `
+        <tr><td colspan="7" style="text-align:center; padding:16px; color:var(--d-text-mute); font-family:var(--ff-mono); font-size:10.5px; letter-spacing:1.3px; text-transform:uppercase">
+          Showing 80 of ${list.length} · Refine filter or search to narrow the view
+        </td></tr>
+      `);
+    }
+
+    tbody.querySelectorAll('tr[data-id]').forEach(tr => {
+      tr.addEventListener('click', () => {
+        const m = d.MEMBERS.find(x => x.id === tr.dataset.id);
+        if (m) openDrawer(m);
+      });
+    });
+  }
+
+  render();
+
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

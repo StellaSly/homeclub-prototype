@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<title>HomeClub · In-store pricing layer · Three tickets</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+<link rel="stylesheet" href="../assets/css/specials.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · In-store layer</span>
+    <h1>A third ticket colour, <em>nothing else changes</em>.</h1>
+    <p>Fourways already runs a two-colour pricing system — green for normal, red for loyalty-exclusive promotions. HomeClub adds a coral ticket for items that earn 2× HomeBucks during a member's active project window. Same template. Same barcode. Same operational flow.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <section class="in-store-wrap">
+    <span class="eyebrow is-eyebrow" data-copy="in_store.eyebrow">In-store pricing layer</span>
+    <h1 data-copy-html="in_store.headline_html">Three colours. <em>Zero operational disruption.</em></h1>
+    <p class="is-sub" data-copy="in_store.sub"></p>
+
+    <div class="ticket-row" id="ticketRow"></div>
+
+    <div class="principles-row" id="principlesRow"></div>
+
+    <div class="aisle-block">
+      <span class="eyebrow" data-copy="in_store.aisle_eyebrow">Gamification layer above the shelf</span>
+      <h2 data-copy-html="in_store.aisle_title_html">Turn the aisle sign into a <em>scan point</em>.</h2>
+      <p class="aisle-body" data-copy="in_store.aisle_body"></p>
+
+      <div class="aisle-sign-mock" aria-label="Aisle sign mock-up">
+        <div class="as-num">28</div>
+        <div class="as-label">Carpentry</div>
+        <div class="as-qr" aria-hidden="true">
+          <span class="as-qr-overlay">+ HC</span>
+        </div>
+      </div>
+
+      <div class="aisle-ideas" id="aisleIdeas"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'in-store', '../');
+
+  const copy = HomeClubApp.getCopy();
+  const is = copy.in_store || {};
+
+  // Tickets
+  const tickets = is.tickets || [];
+  document.getElementById('ticketRow').innerHTML = tickets.map(t => {
+    const wasHtml = t.was ? `<span class="ticket-was">${t.was}</span>` : '';
+    const saveHtml = t.save ? `<span class="ticket-save">Save ${t.save}</span>` : '';
+    return `
+      <div>
+        <article class="price-ticket ${t.colour} ${t.highlight ? 'highlight' : ''}">
+          <div class="ticket-band">
+            <span>${t.label}</span>
+            <span class="t-right">${t.colour.toUpperCase()}</span>
+          </div>
+          <div class="ticket-body">
+            <div class="product">${t.product}</div>
+            <div class="ticket-price-block">
+              <span class="ticket-price">${t.price}</span>
+              ${wasHtml}
+            </div>
+            ${saveHtml}
+            <div class="ticket-barcode" aria-hidden="true"></div>
+          </div>
+          <div class="ticket-footer">${t.note}</div>
+        </article>
+        <div class="ticket-caption">
+          <span class="who">${t.who}</span>
+          <strong>${t.tag}</strong>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Principles
+  const principles = is.principles || [];
+  document.getElementById('principlesRow').innerHTML = principles.map(p => `
+    <article class="principle">
+      <div class="pn">${p.n}</div>
+      <h3>${p.title}</h3>
+      <p>${p.body}</p>
+    </article>
+  `).join('');
+
+  // Aisle ideas
+  const ideas = is.aisle_ideas || [];
+  document.getElementById('aisleIdeas').innerHTML = ideas.map(i => `
+    <article class="aisle-idea">
+      <span class="i" aria-hidden="true">${i.icon}</span>
+      <h4>${i.title}</h4>
+      <p>${i.body}</p>
+    </article>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

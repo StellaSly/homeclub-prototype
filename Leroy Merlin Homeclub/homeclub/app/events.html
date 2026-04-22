@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Events · Decorex, Design Joburg, Homemakers</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · Experiences</span>
+    <h1>Redeem HomeBucks for the <em>real-world moments</em> that inspire projects.</h1>
+    <p>Confirmed 2026 dates are listed where publicly available; others are marked "TBC — illustrative" to avoid misrepresentation.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <header class="app-header">
+        <div>
+          <div class="hi"><em>Experiences</em></div>
+          <div class="sub" data-copy="events.events_caption">Confirmed 2026 dates where public. Others are illustrative.</div>
+        </div>
+        <div class="avatar" aria-label="Thandi Mokoena">TM</div>
+      </header>
+
+      <div class="section-h" style="margin-top: 0">
+        <span>Inspiration events</span>
+        <a href="#">Filter</a>
+      </div>
+
+      <div id="events"></div>
+
+      <!-- Small provenance note -->
+      <div style="margin: 14px 20px 20px; font-size: 10.5px; color: var(--hc-mute); line-height: 1.5; padding: 12px 14px; background: var(--hc-paper); border-radius: 10px; border-left: 3px solid var(--hc-sand)">
+        <strong style="color: var(--hc-charcoal-2);">Data note:</strong> Design Joburg and Decorex Johannesburg dates are drawn from published 2026 schedules. Homemakers Expo and House &amp; Garden Show dates shown are typical annual windows and clearly marked <em>TBC — illustrative</em>.
+      </div>
+
+      <nav class="tabbar" aria-label="App sections">
+        <a href="home.html"><span class="tb-ico">⌂</span><span>Home</span></a>
+        <a href="project.html"><span class="tb-ico">◎</span><span>Project</span></a>
+        <a href="gamification.html"><span class="tb-ico">◆</span><span>Rewards</span></a>
+        <a href="coalition.html"><span class="tb-ico">☵</span><span>Coalition</span></a>
+        <a class="active" href="events.html"><span class="tb-ico">✺</span><span>Events</span></a>
+      </nav>
+    </div>
+  </div>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'events', '../');
+
+  const copy = HomeClubApp.getCopy();
+
+  const statusBadge = s => {
+    if (s === 'confirmed')   return '<span style="color:#2E8B57; font-family:var(--ff-mono); font-size:9px; letter-spacing:1.3px; text-transform:uppercase; font-weight:700">● Confirmed</span>';
+    if (s === 'illustrative')return '<span class="pilot-badge" style="color:#8a6a15">TBC · illustrative</span>';
+    if (s === 'exclusive')   return '<span style="color:var(--hc-coral); font-family:var(--ff-mono); font-size:9px; letter-spacing:1.3px; text-transform:uppercase; font-weight:700">★ HOMESTEAD</span>';
+    return '';
+  };
+
+  document.getElementById('events').innerHTML = copy.events.events.map(e => `
+    <div class="event-row">
+      <div class="event-date">
+        <div class="m">${e.month}</div>
+        <div class="d">${e.day}</div>
+      </div>
+      <div class="event-body">
+        <div class="event-name">${e.name}</div>
+        <div class="event-meta">${e.meta}</div>
+        <div style="margin-top:4px; display:flex; align-items:center; gap:8px; flex-wrap:wrap">
+          <span class="event-cost">${e.cost}</span>
+          ${statusBadge(e.status)}
+        </div>
+      </div>
+    </div>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

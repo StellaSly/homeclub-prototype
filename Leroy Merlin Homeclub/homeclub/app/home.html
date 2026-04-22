@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Home · Thandi's member view</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · Home</span>
+    <h1>The first screen a <em>HOME-tier member</em> sees when they open HomeClub.</h1>
+    <p>Balance, active project, shortcuts, and the day's activity — all stitched together by the Project Engine so every interaction earns toward a goal.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <!-- Greeting -->
+      <header class="app-header">
+        <div>
+          <div class="hi" data-copy-html="home_screen.greet_html">Hi, <em>Thandi</em></div>
+          <div class="sub" data-copy="home_screen.greet_sub">Day 14 of your Paint a Room project</div>
+        </div>
+        <div class="avatar" aria-label="Thandi Mokoena">TM</div>
+      </header>
+
+      <!-- Tier card -->
+      <div class="tier-card">
+        <div class="tier-head">
+          <div>
+            <div class="tier-eyebrow">Your HomeClub tier</div>
+            <div class="tier-name">NEST</div>
+            <div class="home-card-origin">Upgraded from <span>my Home Card</span></div>
+          </div>
+          <div class="chip-logo" aria-hidden="true"></div>
+        </div>
+        <div class="hb-balance">
+          <div class="hb-num">920</div>
+          <div class="hb-unit">HomeBucks</div>
+        </div>
+        <div class="hb-caption" data-copy="home_screen.balance_caption">Earn 2× during your active project window</div>
+        <div class="tier-progress">
+          <div class="progress-track"><div class="progress-fill" style="width: 62%"></div></div>
+          <div class="progress-label">
+            <span>Next tier · <strong>HOME</strong></span>
+            <span>1 project from unlock</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active project card -->
+      <a class="project-card" href="project.html" style="text-decoration:none; display:block">
+        <div class="proj-head">
+          <div>
+            <div class="proj-eyebrow">Active project · Day 14 of 90</div>
+            <div class="proj-name">Paint a Room</div>
+          </div>
+          <div class="multiplier">2×</div>
+        </div>
+        <div class="proj-days-wrap">
+          <div class="proj-days-bar"><div class="proj-days-fill" style="width: 15.5%"></div></div>
+          <div class="proj-days-txt"><strong>76 days</strong> left</div>
+        </div>
+      </a>
+
+      <!-- Shortcuts -->
+      <div class="section-h">
+        <span data-copy="home_screen.shortcut_eyebrow">Shortcuts</span>
+      </div>
+      <div class="tile-row" id="shortcuts"><!-- JS --></div>
+
+      <!-- Recent activity -->
+      <div class="section-h">
+        <span data-copy="home_screen.activity_eyebrow">Recent activity</span>
+        <a href="#">See all</a>
+      </div>
+      <div class="activity-list" id="activity"><!-- JS --></div>
+
+      <!-- Bottom tab bar (mock) -->
+      <nav class="tabbar" aria-label="App sections">
+        <a class="active" href="home.html"><span class="tb-ico">⌂</span><span>Home</span></a>
+        <a href="project.html"><span class="tb-ico">◎</span><span>Project</span></a>
+        <a href="gamification.html"><span class="tb-ico">◆</span><span>Rewards</span></a>
+        <a href="coalition.html"><span class="tb-ico">☵</span><span>Coalition</span></a>
+        <a href="events.html"><span class="tb-ico">✺</span><span>Events</span></a>
+      </nav>
+    </div>
+  </div>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'home', '../');
+
+  const copy = HomeClubApp.getCopy();
+
+  // Shortcuts
+  const shortcuts = copy.home_screen.shortcuts;
+  document.getElementById('shortcuts').innerHTML = shortcuts.map(s => `
+    <button class="tile" aria-label="${s.label}">
+      <div class="tile-ico">${s.icon}</div>
+      <div class="tile-label">${s.label}</div>
+      <div class="tile-caption">${s.caption}</div>
+    </button>
+  `).join('');
+
+  // Activity
+  const activity = copy.home_screen.recent_activity;
+  document.getElementById('activity').innerHTML = activity.map(a => `
+    <div class="activity-row">
+      <div class="a-ico">${a.icon}</div>
+      <div class="a-body">
+        <div class="a-title">${a.title}</div>
+        <div class="a-caption">${a.caption}</div>
+      </div>
+      <div class="a-hb ${a.pos ? '' : 'neg'}">${a.hb}</div>
+    </div>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1c1814">
+<title>HomeClub · Rewards · Badges & challenges</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/member.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="mobile-stage">
+  <div class="mobile-context">
+    <span class="eyebrow">Member app · Rewards & Streaks</span>
+    <h1>Badges built around <em>how South Africans actually build homes</em> — water, energy, paint, patios.</h1>
+    <p>Two of the badges — Water Warrior and Energy Warrior — tie directly into CEO Dufourq's public missions and nudge members toward the eco-ranges already on LM shelves.</p>
+  </div>
+
+  <nav class="step-nav" data-app-nav></nav>
+
+  <div class="phone" style="margin-top: 28px">
+    <div class="phone-screen">
+      <div class="status-bar">
+        <span>9:45</span>
+        <div class="sb-right"><span>VoLTE</span><span>••</span><span>66%</span></div>
+      </div>
+
+      <header class="app-header">
+        <div>
+          <div class="hi">Hi, <em>Thandi</em></div>
+          <div class="sub" data-copy="gamification.headline_html">Badges for buyers who build better homes.</div>
+        </div>
+        <div class="avatar" aria-label="Thandi Mokoena">TM</div>
+      </header>
+
+      <!-- Streak -->
+      <div class="streak-strip">
+        <div class="flame" aria-hidden="true">🔥</div>
+        <div class="s-body">
+          <div class="s-count" data-copy-html="gamification.streak_count_html"><em>3 weeks</em></div>
+          <div class="s-caption" data-copy="gamification.streak_caption">Visit streak — one more week unlocks Committed Builder.</div>
+        </div>
+      </div>
+
+      <!-- This week's challenges -->
+      <div class="section-h" style="margin-top:6px">
+        <span data-copy="gamification.challenges_eyebrow">This week's challenges</span>
+      </div>
+      <div id="challenges"></div>
+
+      <!-- Earned badges -->
+      <div class="section-h" style="margin-top:16px">
+        <span data-copy="gamification.badges_earned_eyebrow">Earned</span>
+      </div>
+      <div class="badge-grid" id="badges-earned"></div>
+
+      <!-- In-progress / locked -->
+      <div class="section-h" style="margin-top:16px">
+        <span data-copy="gamification.badges_progress_eyebrow">In progress</span>
+      </div>
+      <div class="badge-grid" id="badges-progress" style="margin-bottom: 18px"></div>
+
+      <nav class="tabbar" aria-label="App sections">
+        <a href="home.html"><span class="tb-ico">⌂</span><span>Home</span></a>
+        <a href="project.html"><span class="tb-ico">◎</span><span>Project</span></a>
+        <a class="active" href="gamification.html"><span class="tb-ico">◆</span><span>Rewards</span></a>
+        <a href="coalition.html"><span class="tb-ico">☵</span><span>Coalition</span></a>
+        <a href="events.html"><span class="tb-ico">✺</span><span>Events</span></a>
+      </nav>
+    </div>
+  </div>
+
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'app' });
+  await HomeClubApp.initCopy('../');
+
+  const pages = [
+    { key: 'onboarding',   file: 'onboarding.html',   label: 'Onboard' },
+    { key: 'home',         file: 'home.html',         label: 'Home' },
+    { key: 'project',      file: 'project.html',      label: 'Project' },
+    { key: 'gamification', file: 'gamification.html', label: 'Rewards' },
+    { key: 'coalition',    file: 'coalition.html',    label: 'Coalition' },
+    { key: 'events',       file: 'events.html',       label: 'Events' },
+    { key: 'in-store',     file: 'in-store.html',     label: 'In-store' }
+  ];
+  HomeClubApp.renderStepNav(document.querySelector('[data-app-nav]'), pages, 'gamification', '../');
+
+  const copy = HomeClubApp.getCopy();
+
+  // Challenges
+  document.getElementById('challenges').innerHTML = copy.gamification.challenges.map(c => `
+    <div class="challenge-card">
+      <div class="ch-eyebrow">${c.eyebrow}</div>
+      <div class="ch-title">${c.title}</div>
+      <div class="ch-body">${c.body}</div>
+      <div class="ch-foot">
+        <span class="ch-reward">+${c.reward}</span>
+        <button class="ch-btn">${c.cta}</button>
+      </div>
+    </div>
+  `).join('');
+
+  // Badges
+  const badges = copy.gamification.badges;
+  const earned   = badges.filter(b => b.status === 'earned');
+  const progress = badges.filter(b => b.status !== 'earned');
+
+  const badgeHTML = b => `
+    <div class="badge ${b.status === 'earned' ? 'earned' : (b.status === 'locked' ? 'locked' : '')}">
+      <div class="b-ico">${b.icon}</div>
+      <div class="b-name">${b.name}</div>
+      <div class="b-progress">${b.progress}</div>
+    </div>
+  `;
+  document.getElementById('badges-earned').innerHTML   = earned.map(badgeHTML).join('');
+  document.getElementById('badges-progress').innerHTML = progress.map(badgeHTML).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

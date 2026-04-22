@@ -1,0 +1,13 @@
+{
+  "name": "HomeClub — for Leroy Merlin SA",
+  "short_name": "HomeClub",
+  "description": "Prototype coalition loyalty experience prepared by CMR Africa for Leroy Merlin SA.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1c1814",
+  "theme_color": "#E5532A",
+  "icons": [
+    { "src": "assets/img/cmr-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

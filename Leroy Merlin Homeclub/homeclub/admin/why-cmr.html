@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<title>HomeClub · Admin · Why CMR Africa</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="admin-stage">
+
+  <nav class="admin-subnav" aria-label="Admin sections" style="margin-top: 0">
+    <a href="index.html" data-copy="admin_nav.overview">Overview</a>
+    <a href="members.html" data-copy="admin_nav.members">Members</a>
+    <a href="mystery-shop.html">Mystery Shop</a>
+    <a href="why-cmr.html" class="current" data-copy="admin_nav.why_cmr">Why CMR Africa</a>
+  </nav>
+
+  <div class="admin-main">
+
+    <section class="why-hero">
+      <span class="eyebrow w-eyebrow" data-copy="why_cmr.eyebrow">Why CMR Africa</span>
+      <h1 data-copy-html="why_cmr.headline_html">We don't compete with the rewards platform. <em>We sit upstream of it.</em></h1>
+      <p data-copy="why_cmr.sub"></p>
+    </section>
+
+    <section class="why-three" id="whyThree"></section>
+
+    <section class="why-compare">
+      <div class="why-compare-head">
+        <h2 data-copy="why_cmr.compare_title">How we each address Leroy Merlin's brief</h2>
+      </div>
+      <table class="compare-table" id="compareTable"></table>
+    </section>
+
+    <section class="panel" style="padding: 30px 32px; background: linear-gradient(135deg, #141820 0%, #1A1518 100%); border-color: rgba(255,120,71,0.3)">
+      <div style="display:flex; align-items:flex-start; gap: 22px; flex-wrap: wrap">
+        <div style="font-family:var(--ff-display); font-weight:600; font-size:48px; color:var(--d-accent); line-height:1; letter-spacing:-1px; flex-shrink:0">✻</div>
+        <div style="flex:1; min-width: 260px">
+          <h2 style="font-family: var(--ff-display); font-weight: 500; font-size: 22px; letter-spacing: -0.3px; color: var(--d-text); margin-bottom: 10px" data-copy="why_cmr.closing_title">The recommendation we're bringing Leroy Merlin</h2>
+          <p style="color: var(--d-text-mute); font-size: 14px; line-height: 1.65" data-copy="why_cmr.closing_body">Commission TLC (or whoever LM chooses) to run the rewards platform. Commission CMR Africa as the insight and strategy layer that feeds it the right campaigns, the right segments, and the right stories — week after week.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'admin' });
+  await HomeClubApp.initCopy('../');
+
+  const copy = HomeClubApp.getCopy();
+
+  // Three cards
+  document.getElementById('whyThree').innerHTML = copy.why_cmr.three.map(c => `
+    <article class="why-card">
+      <div class="n">${c.n}</div>
+      <h3>${c.title}</h3>
+      <p>${c.body}</p>
+    </article>
+  `).join('');
+
+  // Compare table — CMR column is highlighted
+  const tbl = document.getElementById('compareTable');
+  const headers = copy.why_cmr.compare.headers;
+  const rows    = copy.why_cmr.compare.rows;
+  const cmrIdx  = headers.length - 1;
+
+  tbl.innerHTML = `
+    <thead>
+      <tr>${headers.map((h, i) => `<th${i===cmrIdx ? ' style="color:var(--d-accent)"' : ''}>${h}</th>`).join('')}</tr>
+    </thead>
+    <tbody>
+      ${rows.map(r => `
+        <tr>${r.map((cell, i) => `<td${i===cmrIdx ? ' class="cmr-col"' : ''}>${cell}</td>`).join('')}</tr>
+      `).join('')}
+    </tbody>
+  `;
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>

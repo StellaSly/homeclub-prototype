@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0B0E">
+<title>HomeClub · Admin · Mystery Shop · Fourways · 21 April 2026</title>
+<link rel="icon" type="image/png" href="../assets/img/cmr-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="stylesheet" href="../assets/css/specials.css">
+</head>
+<body>
+
+<nav class="proto-bar" data-proto-bar aria-label="HomeClub prototype navigation"></nav>
+
+<main class="admin-stage">
+
+  <nav class="admin-subnav" aria-label="Admin sections" style="margin-top: 0">
+    <a href="index.html" data-copy="admin_nav.overview">Overview</a>
+    <a href="members.html" data-copy="admin_nav.members">Members</a>
+    <a href="mystery-shop.html" class="current">Mystery Shop</a>
+    <a href="why-cmr.html" data-copy="admin_nav.why_cmr">Why CMR Africa</a>
+  </nav>
+
+  <div class="admin-main">
+
+    <section class="ms-hero">
+      <span class="eyebrow m-eyebrow" data-copy="mystery_shop.eyebrow">Mystery Shop · Fourways · 21 April 2026</span>
+      <h1 data-copy-html="mystery_shop.headline_html">A creative visual report, <em>not a 60-page Word doc</em>.</h1>
+      <p class="m-sub" data-copy="mystery_shop.sub"></p>
+
+      <div class="ms-meta" id="msMeta"></div>
+    </section>
+
+    <section class="ms-topline">
+      <div class="ms-score">
+        <div>
+          <div class="big"><span data-copy="mystery_shop.overall.score">8.2</span><span data-copy="mystery_shop.overall.score_unit">/10</span></div>
+        </div>
+        <div>
+          <div class="lbl" data-copy="mystery_shop.overall.score_label">Overall store experience</div>
+          <h2 data-copy-html="mystery_shop.overall.headline_html"></h2>
+        </div>
+      </div>
+      <div class="ms-summary">
+        <div class="lbl">Field summary</div>
+        <p data-copy="mystery_shop.overall.summary"></p>
+      </div>
+    </section>
+
+    <section class="ms-scorecard">
+      <h3>Multi-dimensional scorecard</h3>
+      <div id="scorecard"></div>
+    </section>
+
+    <section>
+      <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--d-text-mute); font-weight: 600; margin-bottom: 14px">Ten observations — walk order</div>
+      <div class="ms-cards" id="msCards"></div>
+    </section>
+
+    <section class="ms-quote">
+      <blockquote data-copy="mystery_shop.shopper_quote"></blockquote>
+      <div class="ms-quote-attr" data-copy="mystery_shop.shopper_name">CMR Africa field researcher · 21 April 2026</div>
+    </section>
+
+    <section class="ms-closing">
+      <span class="lbl">The brief in one line</span>
+      <div data-copy="mystery_shop.closing"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="disclosure-footer" data-disclosure-footer></footer>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+<script>
+(async () => {
+  HomeClubApp.mountChrome({ pathPrefix: '../', current: 'admin' });
+  await HomeClubApp.initCopy('../');
+
+  const copy = HomeClubApp.getCopy();
+  const ms = copy.mystery_shop || {};
+
+  // Meta row
+  const meta = ms.visit_meta || {};
+  const metaPairs = [
+    { label: 'Store',    value: meta.store   },
+    { label: 'Date',     value: meta.date    },
+    { label: 'Shopper',  value: meta.shopper },
+    { label: 'Mode',     value: meta.mode    },
+    { label: 'Weather',  value: meta.weather }
+  ].filter(p => p.value);
+  document.getElementById('msMeta').innerHTML = metaPairs.map(p => `
+    <div class="m">
+      <div class="ml">${p.label}</div>
+      <div class="mv">${p.value}</div>
+    </div>
+  `).join('');
+
+  // Scorecard
+  const sc = ms.scorecard || [];
+  document.getElementById('scorecard').innerHTML = sc.map(row => {
+    const pct = Math.max(0, Math.min(100, row.v * 10));
+    const cls = row.v >= 8 ? 'hi' : row.v >= 6 ? 'mid' : 'low';
+    return `
+      <div class="sc-row">
+        <div class="dim">${row.dim}</div>
+        <div class="sc-bar"><div class="sc-fill ${cls}" style="width: ${pct}%"></div></div>
+        <div class="sc-val">${row.v.toFixed(1)}</div>
+        <div class="sc-note">${row.note}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Cards
+  const cards = ms.cards || [];
+  document.getElementById('msCards').innerHTML = cards.map(c => `
+    <article class="ms-card tone-${c.tone}">
+      <div class="ms-top">
+        <div class="ms-n">${c.n}</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px">
+          <span class="ms-tone">${c.tone}</span>
+          <span class="ms-score-pill">${c.score.toFixed(1)} / 10</span>
+        </div>
+      </div>
+      <h3>${c.zone}</h3>
+      <div class="ms-obs">${c.obs}</div>
+      <div class="ms-find"><strong>Finding —</strong> ${c.finding}</div>
+      <div class="ms-hc"><span class="tag">HomeClub play</span>${c.homeclub}</div>
+    </article>
+  `).join('');
+})();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('../service-worker.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
